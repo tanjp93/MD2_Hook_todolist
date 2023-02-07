@@ -3,9 +3,18 @@ import { useState } from 'react';
 
 export default function Control(props) {
   const [inputData,setInputData]= useState("");
-  const handleSearch=(e)=>{
+  const handleSearch=()=>{
     props.searchData(inputData)
   }
+  const handleSort = (e)=>{
+    let value = e.target.value;
+    // sortDir va sortBy
+    let arrSort = value.split('-');
+    let sortDir = arrSort[0];
+    let sortBy = arrSort[1];
+    props.handleSort(sortDir,sortBy);
+  }
+
   return (
     <div>
       <div className="card-header">
@@ -21,19 +30,22 @@ export default function Control(props) {
         <input
           type="search"
           className="form-control"
-          placeholder="Search Name Student"
+          placeholder="Search Here"
           title="Search here"
-          onChange={(e)=>setInputData(e.target.value)}
+          onChange={(e)=>(
+            setInputData(e.target.value)
+          )}
         />
         <button className="btn btn-primary btn-icon-text" onClick={handleSearch}>Tìm kiếm</button>
       </form>
     </div>
     <div className="col-3 d-flex align-items-center">
-      <select className="form-control">
-        <option value="">Sắp xếp</option>
-        <option value="">ABC def</option>
-        <option value="">ABC def</option>
-        <option value="">ABC def</option>
+      <select className="form-control" onChange={handleSort}>
+      <option value="">Sort </option>
+        <option value="name-asc">Name Sort A-Z </option>
+        <option value="name-desc">Name Sort Z-A</option>
+        <option value="age-asc">Age Sort (từ thấp tới cao) </option>
+        <option value="age-desc">Age Sort (từ cao tới thấp)</option>
       </select>
     </div>
   </div>
