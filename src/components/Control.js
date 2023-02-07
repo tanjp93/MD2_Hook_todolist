@@ -6,21 +6,25 @@ export default function Control(props) {
   const handleSearch=()=>{
     props.searchData(inputData)
   }
-  const handleSort = (e)=>{
-    let value = e.target.value;
-    // sortDir va sortBy
-    let arrSort = value.split('-');
-    let sortDir = arrSort[0];
-    let sortBy = arrSort[1];
-    props.handleSort(sortDir,sortBy);
+  const handleSortData=(e)=>{
+    let sortValue=e.target.value
+    let sort=sortValue.split("-");
+    let sortDir=sort[0];
+    let sortBy=sort[1];
+    props.handleSort(sortDir,sortBy)
   }
-
+  const addNewStudent=()=>{
+    
+  }
   return (
     <div>
       <div className="card-header">
   <div className="row">
     <div className="col-3">
-      <button type="button" className="btn btn-primary btn-icon-text">
+      <button type="button" 
+      className="btn btn-primary btn-icon-text"
+      onClick={addNewStudent}
+      >
         Thêm mới sinh viên
       </button>
     </div> 
@@ -40,12 +44,12 @@ export default function Control(props) {
       </form>
     </div>
     <div className="col-3 d-flex align-items-center">
-      <select className="form-control" onChange={handleSort}>
+      <select className="form-control" onChange={handleSortData}>
       <option value="">Sort </option>
-        <option value="name-asc">Name Sort A-Z </option>
-        <option value="name-desc">Name Sort Z-A</option>
-        <option value="age-asc">Age Sort (từ thấp tới cao) </option>
-        <option value="age-desc">Age Sort (từ cao tới thấp)</option>
+        <option value="name-ASC">Name Sort A-Z </option>
+        <option value="name-DESC">Name Sort Z-A</option>
+        <option value="age-ASC">Age Sort (từ thấp tới cao) </option>
+        <option value="age-DESC">Age Sort (từ cao tới thấp)</option>
       </select>
     </div>
   </div>
