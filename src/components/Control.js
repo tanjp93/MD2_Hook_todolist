@@ -3,7 +3,8 @@ import { useState } from 'react';
 
 export default function Control(props) {
   const [inputData, setInputData] = useState("");
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault()
     props.searchData(inputData)
   }
   const handleSortData = (e) => {

@@ -3,8 +3,9 @@
 import Control from "./components/Control"
 import ListSudent from "./components/ListStudent"
 import Form from "./components/Form"
-import { useState } from "react";
+import { createContext, useState } from "react";
 
+export const studentContext = createContext();
 function App() {
   const [listStudent, setListStudent] = useState([
     { id: "SV001", nameStudent: "Nguyễn Văn A", age: "20", gender: true, birthDate: "2022-04-13", birthPlace: "HN", address: "Toa nha Hoa Binh" },
@@ -35,9 +36,9 @@ function App() {
 
   // khai bao mang du lieu student
 
-  if (searchlist === "") {displayList = [...listStudent] }
-  else {displayList = listStudent.filter(st => st.nameStudent.toLowerCase().includes(searchlist.toLowerCase()))}
-  
+  if (searchlist === "") { displayList = [...listStudent] }
+  else { displayList = listStudent.filter(st => st.nameStudent.toLowerCase().includes(searchlist.toLowerCase())) }
+
 
   if (sortDir == "name") {
     if (sortBy == "ASC") {
@@ -57,14 +58,20 @@ function App() {
     //set vao listStudent
     setListStudent([...listStudent, studentNew]);
   }
-  const elementToggle=(toggle.status)?<Form toggle={toggle} recieveData={recieveData} />:""
-
+  const elementToggle = (toggle.status) ? <Form toggle={toggle} recieveData={recieveData} /> : ""
+  const [selectedStd, setSelectedStd] = useState('')
+  const rcSelectedStd = (std) => {
+    console.log(std);
+  }
   return (
     <div className="row">
       <div className="col-lg-7 grid-margin stretch-card">
         <div className="card">
           <Control toggle={toggle} setToggle={setToggle} handleSort={handleSort} searchData={searchData} />
-          <ListSudent student={displayList} />
+          <studentContext.Provider value={{rcSelectedStd}}>
+            <ListSudent student={displayList} />
+          </studentContext.Provider>
+
         </div>
         {/* <Form recieveData={recieveData(stdId,stdName,stdAge,stdGender,stdBirtDay,stdBirtPlace,stdAddress)} />     */}
         {elementToggle}
