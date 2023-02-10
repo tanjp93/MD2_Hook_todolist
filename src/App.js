@@ -15,6 +15,7 @@ function App() {
   ]);
   const [searchlist, setSearchlist] = useState("")
   const searchData = (input) => {
+
     setSearchlist(input);
   }
   let [sortDir, setSortDir] = useState("");
@@ -31,11 +32,12 @@ function App() {
       action: ''
     }
   )
+
   // khai bao mang du lieu student
 
-  if (searchlist === []) { return displayList = [...listStudent] }
-  else { displayList = listStudent.filter(st => st.nameStudent.toLowerCase().includes(searchlist)) }
-
+  if (searchlist === "") {displayList = [...listStudent] }
+  else {displayList = listStudent.filter(st => st.nameStudent.toLowerCase().includes(searchlist.toLowerCase()))}
+  
 
   if (sortDir == "name") {
     if (sortBy == "ASC") {
@@ -55,8 +57,7 @@ function App() {
     //set vao listStudent
     setListStudent([...listStudent, studentNew]);
   }
-
-  const elementForm = (toggle.status) ? <Form recieveData={recieveData} /> : ''
+  const elementToggle=(toggle.status)?<Form toggle={toggle} recieveData={recieveData} />:""
 
   return (
     <div className="row">
@@ -66,7 +67,7 @@ function App() {
           <ListSudent student={displayList} />
         </div>
         {/* <Form recieveData={recieveData(stdId,stdName,stdAge,stdGender,stdBirtDay,stdBirtPlace,stdAddress)} />     */}
-        {elementForm}
+        {elementToggle}
       </div>
     </div>
   );

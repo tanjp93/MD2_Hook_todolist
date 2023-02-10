@@ -9,6 +9,7 @@ export default function Form(props) {
   const [stdBirtDay, setStdBirtDay] = useState("");
   const [stdBirtPlace, setStdBirtPlace] = useState("");
   const [stdAddress, setStdAddress] = useState("");
+  const toggle=props.toggle;
 
 
   const handleSubmit = (event) => {
@@ -16,7 +17,6 @@ export default function Form(props) {
     let studentNew = {id:stdId, nameStudent:stdName, age:stdAge, gender:stdGender, birthDate:stdBirtDay, birthPlace:stdBirtPlace, address:stdAddress};
     props.recieveData(studentNew)
   }
-
 
   return (
     <div className="col-8 grid-margin">
@@ -94,7 +94,7 @@ export default function Form(props) {
               </div>
             </div>
             <button type="submit" className="btn btn-primary me-2" onClick={handleSubmit}>
-              Submit
+              {toggle.action}
             </button>
           </form>
         </div>

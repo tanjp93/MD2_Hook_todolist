@@ -13,16 +13,12 @@ export default function Control(props) {
     let sortBy = sort[1];
     props.handleSort(sortDir, sortBy)
   }
-  
-  const handleToggle = () => {
-    props.setToggle(
-      {
-        status: !props.toggle.status,
-        action: 'Add'
-      }
-    )
-  }
-  console.log(props.toggle);
+  const handleToggle = () => props.setToggle(
+    {
+      status: !props.toggle.status,
+      action: 'Add'
+    }
+  )
 
   return (
     <div>
